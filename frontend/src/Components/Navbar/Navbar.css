@@ -1,0 +1,133 @@
+/* --- NAVBAR LAYOUT --- */
+.navbar {
+  padding: 12px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* --- LOGO --- */
+.logo {
+  height: 70px;
+  width: auto;
+}
+
+/* --- NAVBAR LINKS (CENTER) --- */
+.navbar-list {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.navbar-list a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  position: relative;
+  padding: 8px 12px;
+  border-radius: 20px;
+  transition: 0.3s ease;
+}
+
+.navbar-list a:hover,
+.navbar-list .active {
+  background-color: #49557e;
+  color: white;
+}
+
+/* --- RIGHT SECTION: SEARCH, CART, SIGN IN --- */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Icons */
+.search-icon,
+.basket-icon {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  object-fit: contain;
+  transition: 0.3s ease;
+}
+
+.search-icon:hover,
+.basket-icon:hover {
+  transform: scale(1.1);
+}
+
+.navbar-basket-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.navbar-basket-icon .dot {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+/* Sign In Button */
+.sign-in-button {
+  background-color: #49557e;
+  color: white;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 25px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.sign-in-button:hover {
+  background-color: #333a63;
+}
+
+/* Toggle Dark Mode Button */
+.mode-toggle {
+  font-size: 18px;
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* DARK MODE STYLES */
+.dark-mode .navbar {
+  background-color: #2d2d2d;
+}
+
+.dark-mode .navbar-list a {
+  color: #eee;
+}
+
+.dark-mode .navbar-list .active {
+  background-color: #666;
+  color: white;
+}
+
+.dark-mode .search-icon,
+.dark-mode .basket-icon {
+  filter: brightness(0) invert(1);
+}
+
+.dark-mode .sign-in-button {
+  background-color: #666;
+  color: white;
+}
+
+.dark-mode .sign-in-button:hover {
+  background-color: #888;
+}

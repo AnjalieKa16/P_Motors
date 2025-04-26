@@ -1,0 +1,146 @@
+/* --- Spare Part Item Container --- */
+.Spare-part-item {
+    flex: 0 0 auto; /* Prevents shrinking, maintains size */
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px #00000015;
+    transition: 0.3s;
+    animation: fadeIn 1s;
+    display: flex;
+    flex-direction: column; /* Stack the content vertically */
+    justify-content: space-between; /* Ensures proper spacing */
+    height: 100%;
+    border: 1px solid black;
+}
+
+/* --- Add to Cart Button --- */
+.add-to-cart-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    border: none;
+    padding: 6px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 5;
+    transition: transform 0.3s ease;
+}
+
+.Spare-part-item:hover .add-to-cart-btn {
+    display: block;
+    transform: scale(1.1);
+}
+
+/* --- Spare Part Image Container --- */
+.Spare-part-image-container {
+    position: relative;
+    width: 100%;
+    height: 150px; /* Adjust height as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 1px; /* Adjust margin as needed */
+}
+
+.Spare-part-image {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 15px 15px 0px 0px;
+    height: 150px;
+    object-fit: contain; /* Ensures a consistent image size */
+    transition: transform 0.3s ease-in-out; /* Smooth zoom effect */
+}
+
+.Spare-part-image-container:hover .Spare-part-image {
+    transform: scale(1.5); /* Adjust zoom level */
+}
+
+/* --- Item Information Section --- */
+.item-information {
+    padding: 5px;
+    word-wrap: break-word; /* Ensures long words break properly */
+    overflow-wrap: break-word; /* Ensures long words break properly */
+    white-space: normal; /* Allows text to wrap onto the next line */
+    overflow: hidden; /* Prevents text overflow */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limits description to 3 lines */
+    -webkit-box-orient: vertical;
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 4.2em;
+    margin-bottom: 10px;
+}
+
+.item-information2 {
+    margin-bottom: 10px;
+}
+
+.spare-part-desc {
+    color: rgb(5, 5, 5);
+    font-size: 12px;
+    text-align: center; /* Makes text more readable */
+    line-height: 1.4; /* Improves spacing between lines */
+    word-wrap: break-word; /* Ensures long words break properly */
+    overflow: hidden; /* Prevents text overflow */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limits description to 3 lines */
+    -webkit-box-orient: vertical;
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 4.2em;
+}
+
+.spare-part-price {
+    color: tomato;
+    font-size: 22px;
+    font-weight: 500;
+    margin: 1px 0px;
+}
+
+/* --- Add Icon in Image Container --- */
+.Spare-part-image-container .add {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+/* --- Spare Part Item Counter (Commented Out) --- */
+/*
+.Spare-part-item-counter {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    gap: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    min-width: 80px;
+}
+
+.Spare-part-item-counter img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+*/

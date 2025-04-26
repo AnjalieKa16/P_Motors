@@ -1,0 +1,111 @@
+/* Ensure the app fills the full screen */
+html, body, #root, .app {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Optional: if you want a smooth dark mode */
+.app {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Light Mode (default) */
+.app {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Dark Mode */
+.dark-mode {
+  background-color: #121212;
+  color: #fff;
+}
+
+/* Optional: style specific components too */
+.dark-mode .navbar {
+  background-color: #1e1e1e;
+}
+
+.dark-mode .sign-in-button {
+  background-color: #444;
+  color: #fff;
+}
+
+.dark-mode .header-contents h2 {
+  color: #fff;
+}
+
+/* App.css */
+
+.search-icon,
+.cart-icon {
+  color: black; /* light mode default */
+}
+
+body.dark-mode .search-icon,
+body.dark-mode .basket-icon {
+  color: white; /* dark mode override */
+}
+
+/* Add this below your existing CSS */
+
+.page-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* full height of viewport */
+}
+
+.main-content {
+  flex: 1; /* grow to take available space */
+}
+
+/* Optional footer styles */
+footer {
+  padding: 1rem;
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+.dark-mode footer {
+  background-color: #1e1e1e;
+  color: white;
+}

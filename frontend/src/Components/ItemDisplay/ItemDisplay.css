@@ -1,0 +1,25 @@
+.Spare_Part_Display {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.Spare_Part_Display h2 {
+    font-size: max(2vw, 24px);
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #930f0f;
+}
+
+.spare-parts-list-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+    padding: 0 20px;
+    white-space: nowrap;
+}
+
+.Spare-part-item {
+    flex: 0 0 auto;
+    width: 200px; /* Adjust width based on your design */
+}

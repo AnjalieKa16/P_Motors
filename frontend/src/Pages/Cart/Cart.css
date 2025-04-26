@@ -1,0 +1,239 @@
+.cart-container {
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.07);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #222;
+}
+
+.cart-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  background-color: #fafafa;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+.cart-item:hover {
+  transform: translateY(-4px);
+}
+
+.cart-item-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.cart-item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cart-item-details h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.cart-item-details p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.cart-quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.cart-quantity-controls button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  width: 34px;
+  height: 34px;
+  font-size: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cart-quantity-controls button:hover {
+  background-color: #0056b3;
+}
+
+.cart-quantity-controls span {
+  font-weight: 600;
+  font-size: 1.1rem;
+  min-width: 24px;
+  text-align: center;
+}
+
+.remove-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: auto;
+}
+
+.remove-btn:hover {
+  background-color: #c82333;
+}
+
+.cart-total {
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+  margin-top: 30px;
+  text-align: right;
+}
+
+.cart-total p {
+  margin: 6px 0;
+  font-size: 1rem;
+  color: #444;
+}
+
+.cart-total h3 {
+  margin-top: 12px;
+  font-size: 1.4rem;
+  color: #111;
+}
+
+.checkout-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 12px 26px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+.checkout-btn:hover {
+  background-color: #218838;
+}
+
+/* Empty cart styling */
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #f0f4f8, #ffffff);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin: 4rem auto;
+  animation: fadeIn 0.4s ease-in;
+}
+
+.empty-cart-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: #888;
+  animation: bounce 1.2s infinite;
+}
+
+.empty-cart h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.empty-cart p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.empty-cart button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.empty-cart button:hover {
+  background-color: #0056b3;
+}
+
+/* Animations */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-item-image {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: contain;
+  }
+
+  .remove-btn {
+    align-self: flex-end;
+    margin-top: 10px;
+  }
+
+  .cart-total {
+    text-align: center;
+  }
+
+  .checkout-btn {
+    width: 100%;
+  }
+}
