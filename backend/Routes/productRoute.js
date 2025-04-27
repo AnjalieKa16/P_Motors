@@ -21,8 +21,10 @@ const upload = multer({ storage: storage });
 // API route to add a product
 productRouter.post('/add', upload.single('image'), addProductController);
 
+// API route to get the list of products
 productRouter.get('/list',getProductController);
 
+// API route to remove a product
 productRouter.post('/remove', removeProductController);
 
 
