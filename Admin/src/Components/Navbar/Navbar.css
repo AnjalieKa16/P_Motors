@@ -1,0 +1,28 @@
+/* --- LOGO --- */
+.logo {
+    height: 70px;
+    width: auto;
+  }
+
+  .admin_profile{
+    height: 50px;
+    width: 50px;;
+    border-radius: 100%;
+  }
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 4%;
+}
+
+/*
+.navbar .logo{
+    width: max(10%,80px);
+}
+
+
+.navbar .admin_profile{
+    width: 40px;
+}*/
