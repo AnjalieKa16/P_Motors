@@ -3,6 +3,9 @@
  import pool from './config/db.js'; // Assuming you have a db.js file for database connection
  import productRouter from './Routes/productRoute.js';
  import path from 'path';
+ import warrantyRouter from './Routes/warrantyRouter.js';
+ import brandRouter from './Routes/brandRoute.js';
+ import categoryRouter from './Routes/categoryRoute.js';
 
 
  //app config
@@ -26,6 +29,12 @@ pool.getConnection((err, connection) => {
 
 // API routes
 app.use('/api/products', productRouter);
+
+app.use('/api/warranties', warrantyRouter);
+
+app.use('/api/brands', brandRouter);
+
+app.use('/api/categories', categoryRouter);
 
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 

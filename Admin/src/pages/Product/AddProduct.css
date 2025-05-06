@@ -1,4 +1,4 @@
-.uploads{
+/*.uploads{
     width: 24px;
     height: 24px;
 }
@@ -49,4 +49,127 @@
     background-color: black;
     color: white;
     cursor: pointer;
+}*/
+
+.upload-container {
+    width: 140px;
+    height: 140px;
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fafafa;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+  
+  .upload-container:hover {
+    border-color: #888;
+  }
+  
+  .upload-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+  
+  .upload-container:hover .upload-icon {
+    opacity: 1;
+  }
+  
+
+.Add {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+    color: #333;
 }
+
+.Add form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.Add label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.Add input,
+.Add select,
+.Add textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.Add input:focus,
+.Add select:focus,
+.Add textarea:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.add-img-upload {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.uploads {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 2px dashed #ccc;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.add-price-section {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.add-price {
+    flex: 1;
+    min-width: 200px;
+}
+
+.add-button-container {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    margin-top: 20px;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .add-button {
+    background-color: #16a34a; /* Green-600 */
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-button:hover {
+    background-color: #15803d; /* Darker Green-700 */
+  }

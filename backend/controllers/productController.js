@@ -12,19 +12,22 @@ const addProductController = (req, res) => {
     const productData = {
         product_id: req.body.product_id,
         name: req.body.name,
-        brand: req.body.brand,
+        brand_id: req.body.brand_id,
         purchase_price: req.body.purchase_price,
         selling_price: req.body.selling_price,
         category_id: req.body.category_id,
         warranty_id: req.body.warranty_id,
+        description: req.body.description,
         image: image_filename  // Save the filename of the uploaded image
     };
 
     // Ensure product_id is provided
-    if (!productData.product_id || !productData.name || !productData.brand) {
+    if (!productData.product_id || !productData.name || !productData.brand_id || 
+        !productData.category_id || !productData.warranty_id || 
+        !productData.purchase_price || !productData.selling_price || 
+        !productData.description) {
         return res.status(400).json({ success: false, message: 'Missing required fields' });
     }
-
     // Add product to the database
     addProduct(productData, (err, result) => {
         if (err) {
@@ -37,7 +40,7 @@ const addProductController = (req, res) => {
 
 // Get Product List Controller
 const getProductController = (req, res) => {
-    const sql = 'SELECT * FROM product'; // ✅ Table name corrected
+    const sql = 'SELECT * FROM products'; // ✅ Table name corrected
 
     pool.query(sql, (err, results) => {
         if (err) {
@@ -58,7 +61,7 @@ const removeProductController = (req, res) => {
     }
 
     // Step 1: Get the product image filename
-    const getProductQuery = 'SELECT image FROM product WHERE product_id = ?';
+    const getProductQuery = 'SELECT image FROM products WHERE product_id = ?';
     pool.query(getProductQuery, [product_id], (err, results) => {
         if (err) {
             console.error(err);
@@ -72,7 +75,7 @@ const removeProductController = (req, res) => {
         const imagePath = results[0].image;
 
         // Step 2: Delete the product from the database
-        const deleteProductQuery = 'DELETE FROM product WHERE product_id = ?';
+        const deleteProductQuery = 'DELETE FROM products WHERE product_id = ?';
         pool.query(deleteProductQuery, [product_id], (err) => {
             if (err) {
                 console.error(err);
