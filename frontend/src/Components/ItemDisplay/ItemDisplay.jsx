@@ -11,6 +11,7 @@ const SparePartDisplay = ({category}) => {
 
     const {spare_parts_list} = useContext(StoreContext)
     const [visibleProducts,setVisibleProducts] = useState(4);
+    
     const loadMoreProducts=()=>{
       setVisibleProducts(prevcount=> prevcount + 4 )
     }
@@ -20,17 +21,23 @@ const SparePartDisplay = ({category}) => {
     <div className='Spare_Part_Display' id='Spare_Part_Display'>
     <h2>Featured Products</h2>
         <div className='spare-parts-list-display'>
-            {spare_parts_list.map((item,index)=>{
-
-              if(category==='All' || category===item.category ){
-
-                return <SparePartItem 
-                          key={index} id={item._id} name={item.name} description={item.description} price={item.price} image={item.image }/>
-
+            {spare_parts_list.map((item, index) => {
+                if (category === 'All' || category === item.category_name) {
+                    return (
+                      <SparePartItem
+                        key={index}
+                        id={item.product_id}
+                        name={item.name}
+                        selling_price={item.selling_price}
+                        description={item.description}
+                        image={item.image}
+                        category_name={item.category_name}
+                        brand_name={item.brand_name}
+                      />
+                    );
               }
-                
-            })
-            }
+        })}
+
         </div>
     </div>
   )

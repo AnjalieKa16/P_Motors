@@ -1,10 +1,12 @@
-// controllers/brandController.js
 import pool from '../config/db.js';
 
-export const getAllBrands = (req, res) => {
+export const getAllBrands = async (req, res) => {
   const sql = 'SELECT brand_id, brand_name FROM brand';
-  pool.query(sql, (err, results) => {
-    if (err) return res.status(500).json({ success: false, message: 'Error fetching brands' });
+  try {
+    const [results] = await pool.query(sql);
     res.status(200).json({ success: true, data: results });
-  });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Error fetching brands' });
+  }
 };

@@ -1,24 +1,32 @@
 // config/db.js
 
-import mysql from 'mysql';
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
 
-// Create a connection pool for better performance
+// Load environment variables from .env file
+dotenv.config();
+
+// Create a connection pool using mysql2 with promises
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'Aek@0716',        // if you set a password, add it here
-  database: 'motorsdb',
-  connectionLimit: 10  // Optional: max number of connections in the pool
+  host: process.env.DB_HOST,           // MySQL host from .env
+  user: process.env.DB_USER,           // MySQL user from .env
+  password: process.env.DB_PASSWORD,   // MySQL password from .env
+  database: process.env.DB_NAME,       // MySQL database name from .env
+  waitForConnections: true,            // Wait if no connections are available
+  connectionLimit: 10,                 // Max number of simultaneous connections
+  queueLimit: 0                        // 0 = unlimited request queue
 });
 
-// Test the connection
-pool.getConnection((err, connection) => {
-  if (err) {
+// Optional: Test connection on startup
+(async () => {
+  try {
+    const connection = await pool.getConnection();
+    console.log("✅ MySQL Connected Successfully");
+    connection.release(); // Return connection to pool
+  } catch (err) {
     console.error("❌ MySQL Connection Error:", err.message);
-  } else {
-    console.log("✅ MySQL Connected");
-    connection.release();
   }
-});
+})();
 
 export default pool;
+

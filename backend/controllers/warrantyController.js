@@ -1,10 +1,12 @@
-// controllers/warrantyController.js
 import pool from '../config/db.js';
 
-export const getAllWarranties = (req, res) => {
+export const getAllWarranties = async (req, res) => {
   const sql = 'SELECT warranty_id, name FROM warranty_types';
-  pool.query(sql, (err, results) => {
-    if (err) return res.status(500).json({ success: false, message: 'Error fetching warranties' });
+  try {
+    const [results] = await pool.query(sql);
     res.status(200).json({ success: true, data: results });
-  });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Error fetching warranties' });
+  }
 };

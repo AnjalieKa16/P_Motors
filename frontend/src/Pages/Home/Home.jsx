@@ -7,6 +7,7 @@ import ItemDisplay from '../../Components/ItemDisplay/ItemDisplay'
 import Footer from '../../Components/Footer/Footer'
 
 
+
 const Home = () => {
 
   const [category,setCategory] = useState("All");

@@ -1,20 +1,22 @@
 /* --- Spare Part Item Container --- */
 .Spare-part-item {
-    flex: 0 0 auto; /* Prevents shrinking, maintains size */
     position: relative;
     width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0px 0px 10px #00000015;
-    transition: 0.3s;
-    animation: fadeIn 1s;
+    padding: 12px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
-    flex-direction: column; /* Stack the content vertically */
-    justify-content: space-between; /* Ensures proper spacing */
-    height: 100%;
-    border: 1px solid black;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #e0e0e0;
+}
+
+.Spare-part-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* --- Add to Cart Button --- */
@@ -22,89 +24,82 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: white;
+    background-color: #fff;
     border: none;
-    padding: 6px;
+    padding: 8px;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     display: none;
     z-index: 5;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .Spare-part-item:hover .add-to-cart-btn {
     display: block;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 /* --- Spare Part Image Container --- */
 .Spare-part-image-container {
-    position: relative;
     width: 100%;
-    height: 150px; /* Adjust height as needed */
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: white;
-    border-radius: 10px;
-    margin-bottom: 1px; /* Adjust margin as needed */
+    background-color: #fafafa;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    position: relative;
 }
 
 .Spare-part-image {
     max-width: 100%;
     max-height: 100%;
-    border-radius: 15px 15px 0px 0px;
-    height: 150px;
-    object-fit: contain; /* Ensures a consistent image size */
-    transition: transform 0.3s ease-in-out; /* Smooth zoom effect */
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease-in-out;
 }
 
 .Spare-part-image-container:hover .Spare-part-image {
-    transform: scale(1.5); /* Adjust zoom level */
+    transform: scale(1.1);
 }
 
-/* --- Item Information Section --- */
+/* --- Item Info Section --- */
 .item-information {
-    padding: 5px;
-    word-wrap: break-word; /* Ensures long words break properly */
-    overflow-wrap: break-word; /* Ensures long words break properly */
-    white-space: normal; /* Allows text to wrap onto the next line */
-    overflow: hidden; /* Prevents text overflow */
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limits description to 3 lines */
-    -webkit-box-orient: vertical;
+    padding: 6px 4px;
     display: flex;
-    flex-wrap: wrap;
-    max-height: 4.2em;
-    margin-bottom: 10px;
+    flex-direction: column;
+    gap: 6px;
+    overflow: hidden;
 }
 
 .item-information2 {
-    margin-bottom: 10px;
-}
-
-.spare-part-desc {
-    color: rgb(5, 5, 5);
-    font-size: 12px;
-    text-align: center; /* Makes text more readable */
-    line-height: 1.4; /* Improves spacing between lines */
-    word-wrap: break-word; /* Ensures long words break properly */
-    overflow: hidden; /* Prevents text overflow */
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limits description to 3 lines */
-    -webkit-box-orient: vertical;
     display: flex;
-    flex-wrap: wrap;
-    max-height: 4.2em;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
 }
 
+/* --- Description --- */
+.spare-part-desc {
+    font-size: 13px;
+    color: #333;
+    text-align: center;
+    line-height: 1.5;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* --- Price --- */
 .spare-part-price {
-    color: tomato;
-    font-size: 22px;
-    font-weight: 500;
-    margin: 1px 0px;
+    color: #e74c3c;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
 }
 
 /* --- Add Icon in Image Container --- */
@@ -112,12 +107,37 @@
     position: absolute;
     bottom: 10px;
     right: 10px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    background-color: white;
+    width: 32px;
+    height: 32px;
+    background-color: #fff;
     border-radius: 50%;
-    padding: 5px;
+    padding: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.Spare-part-image-container .add:hover {
+    transform: scale(1.1);
+}
+
+/* --- Responsive Improvements --- */
+@media (max-width: 768px) {
+    .Spare-part-item {
+        padding: 10px;
+    }
+
+    .Spare-part-image-container {
+        height: 140px;
+    }
+
+    .spare-part-price {
+        font-size: 18px;
+    }
+
+    .spare-part-desc {
+        font-size: 12px;
+    }
 }
 
 /* --- Spare Part Item Counter (Commented Out) --- */

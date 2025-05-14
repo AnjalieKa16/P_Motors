@@ -6,6 +6,8 @@
  import warrantyRouter from './Routes/warrantyRouter.js';
  import brandRouter from './Routes/brandRoute.js';
  import categoryRouter from './Routes/categoryRoute.js';
+ import userRouter from './Routes/userRoute.js'; // Import userRouter
+ import 'dotenv/config'
 
 
  //app config
@@ -37,6 +39,12 @@ app.use('/api/brands', brandRouter);
 app.use('/api/categories', categoryRouter);
 
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
+
+// Serve static files (images) from the 'uploads' directory
+app.use('/uploads', express.static('uploads'));
+
+
+app.use('/api/users', userRouter); 
 
     app.get('/', (req, res) => {
         res.send('API is working...')

@@ -6,9 +6,9 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const AddProduct = () => {
+const AddProduct = ({url}) => {
 
-    const url = "http://localhost:4000" ;
+    //const url = "http://localhost:4000" ;
     const[image, setImage] = useState(false);
     const[data,setData] = useState({
         product_id:"",
@@ -245,7 +245,7 @@ const AddProduct = () => {
                     </div>
                 </div>
 
-                <div classsName='add-button-container flex'>
+                <div className='add-button-container flex'>
                 <button type='submit' 
                     className='add-button'>ADD</button>
                 </div>

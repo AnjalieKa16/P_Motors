@@ -9,9 +9,13 @@ const Navbar = ({ toggleDarkMode, darkMode,setShowLogin }) => {
   const [menu, setMenu] = useState("menu");
   const navigate = useNavigate(); 
 
-  const {getTotalPrice} = useContext(StoreContext)
+  const {getTotalPrice,token,setToken} = useContext(StoreContext)
 
-
+  const logout = () => {
+    localStorage.removeItem('token');
+    setToken("");
+    navigate('/');
+  }
 
   return (
     <div className='navbar'>
@@ -31,7 +35,17 @@ const Navbar = ({ toggleDarkMode, darkMode,setShowLogin }) => {
           <div className={getTotalPrice()===0?"":'dot'}></div>
         </div>
 
-        <button className='sign-in-button' onClick={()=> setShowLogin(true)}>Sign In</button>
+        {!token?<button className='sign-in-button' onClick={()=>setShowLogin(true)}>sign in</button>
+        :<div className='navbar-profile'>
+          <img src={assets.profile_icon} alt='profile icon' className='profile-icon' />
+          <ul className='navbar-profile-dropdown'>
+            <li><img src={assets.bag_shopping} alt='bag_shopping' className='bag_shopping'/><p>Orders</p></li>
+            <hr/>
+            <li onClick={logout}><img src={assets.logout_icon} alt='logout_icon' className='logout_icon'/><p>Logout</p></li>
+          </ul>
+
+        </div>}
+       {/*<button className='sign-in-button' onClick={()=> setShowLogin(true)}>Sign In</button>*/} 
 
         {/* Toggle Button */}
         <button onClick={toggleDarkMode} className='mode-toggle'>

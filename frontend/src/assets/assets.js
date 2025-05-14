@@ -4,11 +4,6 @@ import search_line from './search-line.svg'
 import shopping_cart from './shopping-cart-2.svg'
 import user from './user-line.svg'
 import basket from './basket.jpg'
-import brake from './brake_set.jpg'
-import filter from './filter.png'
-import Electrical_Electronics from './Electrical&Electronics.jpg'
-import LubricantsFluids from './EngineOil.jpg'
-import Lightnings from './Lightnings.jpg'
 import ToyotaGenuineSparkPlugs90919_01265 from './ToyotaGenuineSparkPlugs90919_01265.png'
 import ToyotaMotorOilSP15W_40_4L from './ToyotaMotorOilSP15W_40_4L.jpg'
 import Honda_Genuine_Spark_Plug_12290_RBJ_003 from './Honda_Genuine_Spark_Plug_12290_RBJ_003.jpg'
@@ -28,6 +23,22 @@ import facebook from './facebook.svg'
 import phone from './phone.svg'
 import shoppingCart from './shoppingCart.svg'
 import cross_icon from './cross_icon.svg'
+import profile_icon from './profile_icon.jpg'
+import logout_icon from './logout_icon.png'
+import bag_shopping from './bag_shopping.svg'
+
+
+import EngineParts from './Engin_parts.jpg';
+import Brakes from './brakes.jpg';
+import ElectricalElectronics from './Electrical_Electronics.webp';
+import Batteries from './bateries.jpg';
+import Lighting from './Lightning.jpg';
+import Filters from './filters.png';
+import LubricantsFluids from './Lubricants&Fluids.jpg';
+import ToolsMaintenance from './Tools & Maintenance.webp';
+import Accessories from './accessories.png';
+import HardwareFasteners from './hardware.jpg';
+
 /*import basket from './basket.jpg'
 import background1 from './backgrond1.jpg'
 
@@ -54,40 +65,69 @@ export const assets = {
     facebook,
     phone,
     shoppingCart,
-    cross_icon
+    cross_icon,
+    profile_icon,
+    logout_icon,
+    bag_shopping,
+
+    EngineParts,
+    Batteries,
+    Lighting,
+    ElectricalElectronics,
+    Brakes,
+    Filters,
+    LubricantsFluids,
+    ToolsMaintenance,
+    Accessories,
+    HardwareFasteners
 
 }
 
 
-export const category_list=[
-    
-    {
-        category_name: 'Brakes',
-        category_image: brake
-    },
-    
-    {
-        category_name: 'Filters',
-        category_image: filter
-    },
+export const category_list = [
+  {
+    category_name: 'Engine Parts',
+    category_image: EngineParts
+  },
+  {
+    category_name: 'Brakes & Suspension',
+    category_image: Brakes
+  },
+  {
+    category_name: 'Electrical & Electronics',
+    category_image: ElectricalElectronics
+  },
+  {
+    category_name: 'Batteries',
+    category_image: Batteries
+  },
+  {
+    category_name: 'Lighting',
+    category_image: Lighting
+  },
+  {
+    category_name: 'Filters',
+    category_image: Filters
+  },
+  {
+    category_name: 'Lubricants & Fluids',
+    category_image: LubricantsFluids
+  },
+  {
+    category_name: 'Tools & Maintenance',
+    category_image: ToolsMaintenance
+  },
+  {
+    category_name: 'Accessories',
+    category_image: Accessories
+  },
+  {
+    category_name: 'Hardware & Fasteners',
+    category_image: HardwareFasteners
+  }
+];
 
-    {
-        category_name: 'Electrical & Electronics',
-        category_image: Electrical_Electronics
-    },
-    
-    {
-        category_name: 'Lubricants & Fluids', //oils
-        category_image: LubricantsFluids
-    },
-    
-    {
-        category_name: 'Lightnings',
-        category_image: Lightnings   
-    }
-]
-
-
+/*
 export const spare_parts_list = [
     {
       _id: "1",
@@ -148,4 +188,4 @@ export const spare_parts_list = [
       
 
 ]
-
+*/

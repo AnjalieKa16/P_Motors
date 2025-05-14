@@ -44,6 +44,8 @@
   
   /* Image Styling */
   .category img {
+    pointer-events: auto;
+    cursor: pointer;
     width: 100%;
     height: 140px;
     object-fit: cover;
