@@ -19,3 +19,8 @@ export const addProduct = (data, callback) => {
         data.image 
     ], callback);
 };
+
+export const findProductById = async (product_id) => {
+  const [rows] = await pool.query('SELECT * FROM products WHERE product_id = ?', [product_id]);
+  return rows[0]; // undefined if not found
+};

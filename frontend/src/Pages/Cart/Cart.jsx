@@ -1,34 +1,39 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { StoreContext } from "../../Components/Context/StoreContext";
-import "./Cart.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./Cart.css";
 
 const Cart = () => {
-  const { cartItems, setCartItems, removeFromCart, getTotalPrice, url } = useContext(StoreContext);
+  const { cartItems, setCartItems, getTotalPrice, url,updateCartItemQuantity,removeFromCart  } = useContext(StoreContext);
   const navigate = useNavigate();
 
-  const increaseQuantity = (productId) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.product_id === productId
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      )
-    );
+  useEffect(() => {
+    const fetchCartData = async () => {
+      try {
+        const response = await axios.get("/api/cart"); // Call backend to get cart data
+        if (response.data.success) {
+          setCartItems(response.data.cartData); // Update cartItems state
+        }
+      } catch (error) {
+        console.error("Error fetching cart data:", error);
+      }
+    };
+
+    fetchCartData(); // Call the function to fetch cart data on page load
+  }, [setCartItems]);
+
+   const increaseQuantity = (productId, currentQuantity) => {
+    updateCartItemQuantity(productId, currentQuantity + 1);
   };
 
-  const decreaseQuantity = (productId) => {
-    setCartItems((prevItems) =>
-      prevItems
-        .map((item) =>
-          item.product_id === productId
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
+  const decreaseQuantity = (productId, currentQuantity) => {
+    if (currentQuantity > 1) {
+      updateCartItemQuantity(productId, currentQuantity - 1);
+    } else {
+      removeFromCart(productId);
+    }
   };
-
   const totalPrice = getTotalPrice(); // Call the function
   const deliveryCharge = 200;
   const totalWithDelivery = totalPrice + deliveryCharge;
@@ -58,9 +63,9 @@ const Cart = () => {
             <h4>{item.name}</h4>
             <p>Price: Rs. {item.selling_price}</p>
             <div className="cart-quantity-controls">
-              <button onClick={() => decreaseQuantity(item.product_id)}>-</button>
+              <button onClick={() => decreaseQuantity(item.product_id,item.quantity)}>-</button>
               <span>{item.quantity}</span>
-              <button onClick={() => increaseQuantity(item.product_id)}>+</button>
+              <button onClick={() => increaseQuantity(item.product_id,item.quantity)}>+</button>
             </div>
             <p>Subtotal: Rs. {item.selling_price * item.quantity}</p>
           </div>

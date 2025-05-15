@@ -104,34 +104,7 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const url = "http://localhost:4000";
 
-  const addToCart = (product) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.product_id === product.product_id);
-      if (existingItem) {
-        return prevItems.map((item) =>
-          item.product_id === product.product_id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      } else {
-        return [...prevItems, { ...product, quantity: 1 }];
-      }
-    });
-  };
-
-  const removeFromCart = (productId) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.product_id !== productId)
-    );
-  };
-
-  const getTotalPrice = () => {
-    return cartItems.reduce(
-      (total, item) => total + item.selling_price * item.quantity,
-      0
-    );
-  };
-
+  // Fetch spare parts
   const fetchSparePartList = async () => {
     try {
       const response = await axios.get(url + "/api/products/list");
@@ -145,23 +118,122 @@ const StoreContextProvider = (props) => {
     }
   };
 
+  // Fetch categories
+  const fetchCategoryList = async () => {
+    try {
+      const response = await axios.get(url + "/api/categories/list");
+      setCategoryList(response.data.data || []);
+    } catch (error) {
+      console.error("Error fetching categories", error);
+    }
+  };
+
+  // Fetch cart from backend and merge with product info
+  const fetchCartData = async () => {
+    if (!token) return;
+    try {
+      const response = await axios.get(url + "/api/cart/get", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (response.data.success) {
+        const cartObj = response.data.cartData || {};
+        const cartArr = Object.entries(cartObj).map(([product_id, quantity]) => {
+          const product = spare_parts_list.find(p => p.product_id === product_id);
+          return product ? { ...product, quantity } : null;
+        }).filter(Boolean);
+        setCartItems(cartArr);
+      }
+    } catch (error) {
+      console.error("Error fetching cart data:", error);
+    }
+  };
+
+  // Add to cart (frontend and backend)
+  const addToCart = async (product) => {
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((item) => item.product_id === product.product_id);
+      if (existingItem) {
+        return prevItems.map((item) =>
+          item.product_id === product.product_id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prevItems, { ...product, quantity: 1 }];
+      }
+    });
+
+    if (token) {
+      await axios.post(url + "/api/cart/add",
+        { product_id: product.product_id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      fetchCartData();
+    }
+  };
+
+  // Remove from cart (frontend and backend)
+  const removeFromCart = async (productId) => {
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.product_id !== productId)
+    );
+
+    if (token) {
+      await axios.post(
+        url + "/api/cart/remove",
+        { product_id: productId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      fetchCartData();
+    }
+  };
+
+  // Update quantity in backend and sync
+  const updateCartItemQuantity = async (productId, quantity) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.product_id === productId ? { ...item, quantity } : item
+      )
+    );
+
+    if (token) {
+      await axios.post(
+        url + "/api/cart/update",
+        { product_id: productId, quantity },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      fetchCartData();
+    }
+  };
+
+  // Calculate total price
+  const getTotalPrice = () => {
+    return cartItems.reduce(
+      (total, item) => total + item.selling_price * item.quantity,
+      0
+    );
+  };
+
+  // Initial load: products, categories, token
   useEffect(() => {
     async function loadData() {
-      try {
-        await fetchSparePartList();
-        const categoryResponse = await axios.get(`${url}/api/categories/list`);
-        setCategoryList(categoryResponse.data.data); // Adjust based on backend response structure
-
-        const token = localStorage.getItem('token');
-        if (token) {
-          setToken(token);
-        }
-      } catch (error) {
-        console.error("Error loading data:", error);
+      await fetchSparePartList();
+      await fetchCategoryList();
+      const tokenFromStorage = localStorage.getItem('token');
+      if (tokenFromStorage) {
+        setToken(tokenFromStorage);
       }
     }
     loadData();
   }, []);
+
+  // Fetch cart when both token and products are loaded
+  useEffect(() => {
+    if (token && spare_parts_list.length > 0) {
+      fetchCartData();
+    }
+    // eslint-disable-next-line
+  }, [token, spare_parts_list]);
 
   const contextValue = {
     spare_parts_list,
@@ -175,6 +247,8 @@ const StoreContextProvider = (props) => {
     setToken,
     categoryList,
     setCategoryList,
+    updateCartItemQuantity,
+    fetchCartData,
   };
 
   return (

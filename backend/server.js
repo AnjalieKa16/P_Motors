@@ -7,7 +7,8 @@
  import brandRouter from './Routes/brandRoute.js';
  import categoryRouter from './Routes/categoryRoute.js';
  import userRouter from './Routes/userRoute.js'; // Import userRouter
- import 'dotenv/config'
+ import 'dotenv/config';
+ import cartRouter from './Routes/cartRoute.js'; // Import cartRouter
 
 
  //app config
@@ -30,7 +31,7 @@ pool.getConnection((err, connection) => {
 });
 
 // API routes
-app.use('/api/products', productRouter);
+
 
 app.use('/api/warranties', warrantyRouter);
 
@@ -43,8 +44,9 @@ app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 // Serve static files (images) from the 'uploads' directory
 app.use('/uploads', express.static('uploads'));
 
-
+app.use('/api/products', productRouter);
 app.use('/api/users', userRouter); 
+app.use('/api/cart', cartRouter); // Add this line to use the cart routes
 
     app.get('/', (req, res) => {
         res.send('API is working...')
