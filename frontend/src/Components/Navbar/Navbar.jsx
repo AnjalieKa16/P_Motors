@@ -39,7 +39,7 @@ const Navbar = ({ toggleDarkMode, darkMode,setShowLogin }) => {
         :<div className='navbar-profile'>
           <img src={assets.profile_icon} alt='profile icon' className='profile-icon' />
           <ul className='navbar-profile-dropdown'>
-            <li><img src={assets.bag_shopping} alt='bag_shopping' className='bag_shopping'/><p>Orders</p></li>
+            <li onClick={()=>navigate('/myorders')}><img src={assets.bag_shopping} alt='bag_shopping' className='bag_shopping'/><p>Orders</p></li>
             <hr/>
             <li onClick={logout}><img src={assets.logout_icon} alt='logout_icon' className='logout_icon'/><p>Logout</p></li>
           </ul>

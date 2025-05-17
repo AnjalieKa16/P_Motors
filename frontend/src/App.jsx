@@ -8,6 +8,8 @@ import PlaceOrder from './Pages/PlaceOrder/PlaceOrder'
 import ProductDetails from './Pages/ProductDetails/ProductDetails' 
 import LoginPopup from './Pages/LoginPopup'
 import Footer from './Components/Footer/Footer'
+import Verify from './Pages/Verify/verify'
+import MyOrders from './Pages/MyOrders/MyOrders'
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -37,7 +39,10 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/order' element={<PlaceOrder />} />
-        <Route path='/product/:id' element={<ProductDetails />} /> {/* << Add this */}
+        <Route path='/product/:id' element={<ProductDetails />} /> 
+        <Route path='/verify' element={<Verify/>} />
+        <Route path='/myorders' element={<MyOrders/>}></Route>
+
       </Routes>
     </div>
     <Footer/>
