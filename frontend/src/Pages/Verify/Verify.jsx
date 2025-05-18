@@ -16,7 +16,7 @@ const Verify = () => {
     //console.log(success,orderId);
 
     const verifyPayment =async()=>{
-        const response =await axios.post(url + '/api/orders/verify',{success,orderId} )
+        const response =await axios.post(url + '/api/order/verify',{success,orderId} )
         if(response.data.success){
             navigate('/myorders');
         }else{

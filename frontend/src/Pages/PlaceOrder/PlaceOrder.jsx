@@ -57,7 +57,7 @@ const PlaceOrder = () => {
         amount: getTotalPrice() + deliveryCharge,
       }
 
-      let response = await axios.post(url+"/api/orders/place", orderData, { headers: { Authorization: `Bearer ${token}` }});
+      let response = await axios.post(url+"/api/order/place", orderData, { headers: { Authorization: `Bearer ${token}` }});
       if (response.data.success) {
         const {session_url} = response.data;
         window.location.replace(session_url);

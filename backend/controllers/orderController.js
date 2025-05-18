@@ -98,26 +98,22 @@ const getOrder = async (req, res) => {
 };
 
 const verifyOrder = async (req, res) => {
-  const { orderId, success } = req.body;
   try {
-    if (success === true || success === "true") {
-      await orderModel.updateOrderStatus(orderId, { payment: true });
-      res.json({
-        message: 'Paid',
-        success: true
-      });
+    const { orderId, success } = req.body;
+    if (!orderId) {
+      return res.status(400).json({ success: false, message: "Missing orderId" });
+    }
+    if (success) {
+      await orderModel.updateOrderFields(orderId, { payment: true });
+      res.json({ success: true, message: "Payment verified" });
     } else {
-      await orderModel.deleteOrderById(orderId);
-      res.json({
-        message: 'Not Paid',
-        success: false
-      });
+      res.json({ success: false, message: "Payment not successful" });
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: 'Failed to verify order.', error: error.message });
+    res.status(500).json({ success: false, message: "Error verifying payment" });
   }
-}
+};
 
 // users orders for frontend
 
@@ -138,9 +134,49 @@ const userOrders = async (req, res) => {
   }
 };
 
+
+// To List all order list for Admin
+/*
+const listOrders = async (req, res) => {
+  try {
+    const orders = await orderModel.getAllOrders();
+    res.json({ success: true, data: orders });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Error" });
+  }
+};
+*/
+
+const listOrders = async (req, res) => {
+  try {
+    const orders = await orderModel.getAllOrders();
+    // For each order, fetch its items
+    for (const order of orders) {
+      order.items = await orderModel.getOrderItemsByOrderId(order.order_id);
+    }
+    res.json({ success: true, data: orders });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Error" });
+  }
+};
+
+// api for updating order states in database  when chenge in frontend
+const updateStatus = async (req, res) => {
+  try {
+    await orderModel.updateOrderStatus(req.body.orderId, req.body.status);
+    res.json({ success: true, message: "Status Updated" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Error" });
+  }
+};
+
 export {
   placeOrder,
   getOrder,
   verifyOrder,
-  userOrders
+  userOrders,
+  listOrders,
+  updateStatus
 };

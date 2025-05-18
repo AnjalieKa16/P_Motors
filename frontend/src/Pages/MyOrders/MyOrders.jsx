@@ -10,7 +10,7 @@ const MyOrders = () => {
     const[data,setData]=useState([]);
 
     const fetchOrders = async()=>{
-        const response =await axios.post(url+"/api/orders/userorders",{},{headers:{ Authorization: `Bearer ${token}` }});
+        const response =await axios.post(url+"/api/order/userorders",{},{headers:{ Authorization: `Bearer ${token}` }});
         setData(response.data.orders);   // since backend res.json({ success: true, orders });
         //console.log(response.data.orders);
     }
@@ -45,7 +45,7 @@ const MyOrders = () => {
                     <p>Rs. {order.amount}.00</p>
                     <p>Items:{order.items.length}</p>
                     <p><span>&#x25cf;</span> <b>{order.status}</b></p>
-                    <button>Trach Order</button>
+                    <button onClick={fetchOrders}>Trach Order</button>
 
 
 

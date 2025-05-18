@@ -66,7 +66,7 @@ const getOrdersByUserId = async (userId) => {
 
 
 // Update order status or payment
-export const updateOrderStatus = async (orderId, updateFields) => {
+export const updateOrderFields = async (orderId, updateFields) => {
   // updateFields should be an object, e.g. { payment: true } or { status: 'Paid' }
   const setClause = Object.keys(updateFields)
     .map(field => `${field} = ?`)
@@ -80,6 +80,11 @@ export const updateOrderStatus = async (orderId, updateFields) => {
   );
 };
 
+export const updateOrderStatus = async (orderId, status) => {
+  await pool.query('UPDATE orders SET status = ? WHERE order_id = ?', [status, orderId]);
+};
+
+
 const deleteOrderById = async (orderId) => {
   await pool.query('DELETE FROM orders WHERE order_id = ?', [orderId]);
 };
@@ -92,11 +97,18 @@ const getOrderItemsByOrderId = async (orderId) => {
   return items;
 };
 
+export const getAllOrders = async () => {
+  const [orders] = await pool.query('SELECT * FROM orders');
+  return orders;
+};
+
 export default {
   createOrder,
   getOrderById,
-  updateOrderStatus,
+  updateOrderFields,
   deleteOrderById,
   getOrdersByUserId,
-  getOrderItemsByOrderId
+  getOrderItemsByOrderId,
+  getAllOrders,
+  updateOrderStatus
 };

@@ -49,8 +49,8 @@ app.use('/api/products', productRouter);
 app.use('/api/users', userRouter); 
 app.use('/api/cart', cartRouter); // Add this line to use the cart routes
 
-// Mount order routes at /orders
-app.use('/api/orders', orderRouter);
+// Mount order routes at /order
+app.use('/api/order', orderRouter);
 
     app.get('/', (req, res) => {
         res.send('API is working...')
