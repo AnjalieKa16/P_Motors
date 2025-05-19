@@ -277,6 +277,11 @@ const StoreContextProvider = (props) => {
   const [error, setError] = useState(null);
   const url = "http://localhost:4000";
 
+   const [user, setUser] = useState(() => {
+    const saved = localStorage.getItem('user');
+    return saved ? JSON.parse(saved) : null;
+  });
+
   // Fetch spare parts
   const fetchSparePartList = async () => {
     setLoading(true);
@@ -423,6 +428,66 @@ const StoreContextProvider = (props) => {
     // eslint-disable-next-line
   }, [token, spare_parts_list]);
 
+    // Save user to localStorage when it changes
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [user]);
+
+  // Save token to localStorage when it changes
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem('token', token);
+    } else {
+      localStorage.removeItem('token');
+    }
+  }, [token]);
+
+   // Example: Call this after login or profile update
+  const fetchUserProfile = async () => {
+    if (!token) return;
+    try {
+      const res = await axios.get(`${url}/api/users/profile`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setUser(res.data.data);
+    } catch (err) {
+      setUser(null);
+    }
+  };
+
+  // Optionally, fetch user profile on mount if token exists
+  useEffect(() => {
+    if (token && !user) {
+      fetchUserProfile();
+    }
+    // eslint-disable-next-line
+  }, [token]);
+
+
+  useEffect(() => {
+  fetch(`${url}/api/admin/profile`)
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to fetch");
+      return res.json();
+    })
+    .then(data => {
+      if (data.name) {
+        setAdminName(data.name);
+        toast.success("Admin profile loaded");
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      toast.error("Failed to load admin profile");
+    });
+}, []);
+
+
+
   const contextValue = {
     spare_parts_list,
     cartItems,
@@ -439,6 +504,9 @@ const StoreContextProvider = (props) => {
     fetchCartData,
     loading,
     error,
+    user,
+    setUser,
+    fetchUserProfile,
   };
 
   return (

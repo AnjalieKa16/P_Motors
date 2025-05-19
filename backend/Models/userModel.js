@@ -48,5 +48,5 @@ export default {
   findUserById,
   findByIdAndUpdate,
   createUser,
-  updateCartData,  // Added this method to directly update cart data
+  updateCartData  // Added this method to directly update cart data
 };

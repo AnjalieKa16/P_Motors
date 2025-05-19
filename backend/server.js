@@ -10,6 +10,9 @@
  import 'dotenv/config';
  import cartRouter from './Routes/cartRoute.js'; // Import cartRouter
  import orderRouter from './Routes/orderRoute.js'; // Import orderRouter
+ import salesRouter from './Routes/salesRoute.js';
+
+
 
 
  //app config
@@ -51,6 +54,10 @@ app.use('/api/cart', cartRouter); // Add this line to use the cart routes
 
 // Mount order routes at /order
 app.use('/api/order', orderRouter);
+
+
+//Physical sales 
+app.use('/api/sales', salesRouter);
 
     app.get('/', (req, res) => {
         res.send('API is working...')

@@ -10,6 +10,8 @@ import LoginPopup from './Pages/LoginPopup'
 import Footer from './Components/Footer/Footer'
 import Verify from './Pages/Verify/verify'
 import MyOrders from './Pages/MyOrders/MyOrders'
+import Profile from './Components/Profile'
+import EditProfile from './Components/EditProfile'
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -42,7 +44,9 @@ const App = () => {
         <Route path='/product/:id' element={<ProductDetails />} /> 
         <Route path='/verify' element={<Verify/>} />
         <Route path='/myorders' element={<MyOrders/>}></Route>
-
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/edit" element={<EditProfile />} />
+        
       </Routes>
     </div>
     <Footer/>

@@ -64,4 +64,21 @@ const loginUser = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser };
+
+// controllers/userController.js
+const getUserProfile = async (req, res) => {
+  try {
+    // req.user should be set by authMiddleware
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+    const user = await userModel.findUserById(req.user.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.json({ data: user });
+  } catch (err) {
+    console.error(err); // This will show the real error in your backend console
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export { registerUser, loginUser,getUserProfile };

@@ -1,0 +1,66 @@
+.profile-edit {
+  max-width: 400px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 32px 24px;
+}
+
+.profile-edit h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.profile-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.profile-edit-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.profile-edit-form input {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+.profile-edit-form input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.profile-edit-form button {
+  margin-top: 10px;
+  padding: 10px 0;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.profile-edit-form button:hover {
+  background: #0056b3;
+}
+
+.profile-edit p {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
